@@ -52,3 +52,12 @@ def converter_dados(models):
     }
     return dados_convertidos
 
+
+def historico_mensagem(dados_convertidos):
+    descricao_historico = []
+    for descricao in dados_convertidos["historico"]:
+        if "mensagem" in descricao:
+            descricao_historico.append(descricao["mensagem"])
+    return "/n".join(descricao_historico)
+
+
