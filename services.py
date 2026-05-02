@@ -61,3 +61,15 @@ def historico_mensagem(dados_convertidos):
     return "/n".join(descricao_historico)
 
 
+def filtro_historico(dados_convertidos, opcao_filtro):
+    historico_filtrado = []
+    for filtro in dados_convertidos["historico"]:
+        if filtro["tipo"] == opcao_filtro:
+            historico_filtrado.append(filtro)
+    
+    filtro_formatado = []
+    for formatar in historico_filtrado:
+        if "mensagem" in formatar:
+            filtro_formatado.append(formatar["mensagem"])
+    return "/n".join(filtro_formatado)
+
