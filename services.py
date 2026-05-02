@@ -38,3 +38,17 @@ def sacar(models, valor_saque):
         }
         models.historico.append(transacoes)
         models.saldo -= valor_saque
+
+
+def converter_dados(models):
+    titular_transacao = models.titular
+    saldo_transacao = models.saldo
+    historico_transacao = models.historico
+
+    dados_convertidos = {
+        "titular": titular_transacao,
+        "saldo": saldo_transacao,
+        "historico": historico_transacao
+    }
+    return dados_convertidos
+
