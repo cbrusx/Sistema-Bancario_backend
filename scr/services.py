@@ -1,14 +1,16 @@
 from models import Cliente
-from datetime import Datetime
+from datetime import datetime
 
-def saldo(models):
-    saldo = models.saldo
+cliente = Cliente
+
+def saldo(cliente):
+    saldo = cliente.saldo
     return saldo
 
 
-def depositar(models, valor_deposito):
+def depositar(cliente, valor_deposito):
     if valor_deposito > 0:
-        data_transacao = Datetime.now()
+        data_transacao = datetime.now()
         data_transacao = data_transacao.strftime("%Y/%m/%d %H:%M:%S")
         
         transacoes = {
@@ -17,17 +19,17 @@ def depositar(models, valor_deposito):
             "data_hora":data_transacao,
             "mensagem":"f'Deposito de R${valor_deposito:.2f} as {data_transacao}"
         }
-        models.historico.append(transacoes)
-        models.saldo += valor_deposito
+        cliente.historico.append(transacoes)
+        cliente.saldo += valor_deposito
 
 
-def sacar(models, valor_saque):
+def sacar(cliente, valor_saque):
     if valor_saque < 0:
         return "Valor Invalido"
-    elif valor_saque > models.saldo:
+    elif valor_saque > cliente.saldo:
         return "Valor Insuficiente"
     else:
-        data_transacao = Datetime.now()
+        data_transacao = datetime.now()
         data_transacao = data_transacao.strftime("%Y/%m/%d %H:%M:%S")
 
         transacoes = {
@@ -36,14 +38,14 @@ def sacar(models, valor_saque):
             "data_hora": data_transacao,
             "mensagem":"f'Saque de R${valor_saque:.2f} as {data_transacao}"
         }
-        models.historico.append(transacoes)
-        models.saldo -= valor_saque
+        cliente.historico.append(transacoes)
+        cliente.saldo -= valor_saque
 
 
-def converter_dados(models):
-    titular_transacao = models.titular
-    saldo_transacao = models.saldo
-    historico_transacao = models.historico
+def converter_dados(cliente):
+    titular_transacao = cliente.titular
+    saldo_transacao = cliente.saldo
+    historico_transacao = cliente.historico
 
     dados_convertidos = {
         "titular": titular_transacao,
