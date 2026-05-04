@@ -13,8 +13,13 @@ while True:
     print("5 -> VER EXTRATO FILTRADO")
     print("0 -> SAIR")
     
-    opcao_menu = input("DIGITE UM NUMERO DO MENU QUE DESEJA VER ")
+    opcao_menu = input("DIGITE UM NUMERO DO MENU QUE DESEJA VER: ")
 
     if opcao_menu == "1": #SALDO
         saldo = services.saldo(cliente_titular)
         print(saldo)
+
+    elif opcao_menu == "2": #DEPOSITAR
+        valor_deposito = int(input("DIGITE O VALOR PARA DEPOSITO: "))
+        services.depositar(cliente_titular, valor_deposito)
+        print(f"FOI DEPOSITADO R${valor_deposito}")   
