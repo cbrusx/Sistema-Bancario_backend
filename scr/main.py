@@ -20,6 +20,11 @@ while True:
         print(saldo)
 
     elif opcao_menu == "2": #DEPOSITAR
-        valor_deposito = int(input("DIGITE O VALOR PARA DEPOSITO: "))
+        valor_deposito = float(input("DIGITE O VALOR PARA DEPOSITO: "))
         services.depositar(cliente_titular, valor_deposito)
         print(f"FOI DEPOSITADO R${valor_deposito}")   
+
+    elif opcao_menu == "3": #SACAR
+        valor_saque = float(input("DIGITE O VALOR PARA SAQUE: "))
+        services.sacar(cliente_titular, valor_saque)
+        print(f"FOI SACADO R${valor_saque}")
