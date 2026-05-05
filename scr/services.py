@@ -17,7 +17,7 @@ def depositar(cliente, valor_deposito):
             "tipo":"deposito",
             "valor":"valor_deposito",
             "data_hora":data_transacao,
-            "mensagem":"f'Deposito de R${valor_deposito:.2f} as {data_transacao}"
+            "mensagem":f"Deposito de R${valor_deposito:.2f} {'-'*20} {data_transacao}"
         }
         cliente.historico.append(transacoes)
         cliente.saldo += valor_deposito
@@ -36,7 +36,7 @@ def sacar(cliente, valor_saque):
             "tipo":"saque",
             "valor":"valor_saque",
             "data_hora": data_transacao,
-            "mensagem":"f'Saque de R${valor_saque:.2f} as {data_transacao}"
+            "mensagem":f"Saque de R${valor_saque:.2f} {'-'*24} {data_transacao}"
         }
         cliente.historico.append(transacoes)
         cliente.saldo -= valor_saque
@@ -60,7 +60,7 @@ def historico_mensagem(dados_convertidos):
     for descricao in dados_convertidos["historico"]:
         if "mensagem" in descricao:
             descricao_historico.append(descricao["mensagem"])
-    return "/n".join(descricao_historico)
+    return "\n".join(descricao_historico)
 
 
 def filtro_historico(dados_convertidos, opcao_filtro):
