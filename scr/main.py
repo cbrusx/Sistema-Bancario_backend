@@ -28,3 +28,9 @@ while True:
         valor_saque = float(input("DIGITE O VALOR PARA SAQUE: "))
         services.sacar(cliente_titular, valor_saque)
         print(f"FOI SACADO R${valor_saque}")
+
+    elif opcao_menu == "4":#VER EXTRATO
+        dados_convertidos = services.converter_dados(cliente_titular)
+        print(f"/n{'-'*15} EXTRATO BANCARIO DE {cliente_titular.titular}{'-'*15}\n")
+        extrato_mensagem = services.historico_mensagem(dados_convertidos)
+        print(extrato_mensagem)
