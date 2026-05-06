@@ -10,36 +10,39 @@ def saldo(cliente):
 
 def depositar(cliente, valor_deposito):
     if valor_deposito > 0:
-        data_transacao = datetime.now()
-        data_transacao = data_transacao.strftime("%Y/%m/%d %H:%M:%S")
-        
-        transacoes = {
-            "tipo":"deposito",
-            "valor":"valor_deposito",
-            "data_hora":data_transacao,
-            "mensagem":f"Deposito de R${valor_deposito:.2f} {'-'*20} {data_transacao}"
-        }
-        cliente.historico.append(transacoes)
-        cliente.saldo += valor_deposito
+        return {"status":"erro","mensagem":"VALOR INVALIDO"}
+    data_transacao = datetime.now()
+    data_transacao = data_transacao.strftime("%Y/%m/%d %H:%M:%S")
+    
+    transacoes = {
+        "tipo":"deposito",
+        "valor":valor_deposito,
+        "data_hora":data_transacao,
+        "mensagem":f"Deposito de R${valor_deposito:.2f} {'-'*20} {data_transacao}"
+    }
+    cliente.historico.append(transacoes)
+    cliente.saldo += valor_deposito
+    return {"status":"erro","mensagem":"DEPOSITO REALIZADO COM SUCESSO"}
 
 
 def sacar(cliente, valor_saque):
-    if valor_saque < 0:
-        return "Valor Invalido"
-    elif valor_saque > cliente.saldo:
-        return "Valor Insuficiente"
-    else:
-        data_transacao = datetime.now()
-        data_transacao = data_transacao.strftime("%Y/%m/%d %H:%M:%S")
+    if valor_saque <= 0:
+        return {"status":"erro","mensagem":"VALOR INVALIDO"}
+    if valor_saque > cliente.saldo:
+        return {"status":"erro","mensagem":"VALOR INSUFICIENTE"}    
+    
+    data_transacao = datetime.now()
+    data_transacao = data_transacao.strftime("%Y/%m/%d %H:%M:%S")
 
-        transacoes = {
-            "tipo":"saque",
-            "valor":"valor_saque",
-            "data_hora": data_transacao,
-            "mensagem":f"Saque de R${valor_saque:.2f} {'-'*24} {data_transacao}"
-        }
-        cliente.historico.append(transacoes)
-        cliente.saldo -= valor_saque
+    transacoes = {
+        "tipo":"saque",
+        "valor":valor_saque,
+        "data_hora": data_transacao,
+        "mensagem":f"Saque de R${valor_saque:.2f} {'-'*24} {data_transacao}"
+    }
+    cliente.historico.append(transacoes)
+    cliente.saldo -= valor_saque
+    return {"status":"erro","mensagem":"SAQUE REALIZADO COM SUCESSO"}
 
 
 def converter_dados(cliente):
