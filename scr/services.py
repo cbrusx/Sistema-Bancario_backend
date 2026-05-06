@@ -9,7 +9,7 @@ def saldo(cliente):
 
 
 def depositar(cliente, valor_deposito):
-    if valor_deposito > 0:
+    if valor_deposito < 0:
         return {"status":"erro","mensagem":"VALOR INVALIDO"}
     data_transacao = datetime.now()
     data_transacao = data_transacao.strftime("%Y/%m/%d %H:%M:%S")

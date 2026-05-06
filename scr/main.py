@@ -21,13 +21,13 @@ while True:
 
     elif opcao_menu == "2": #DEPOSITAR
         valor_deposito = float(input("DIGITE O VALOR PARA DEPOSITO: "))
-        services.depositar(cliente_titular, valor_deposito)
-        print(f"FOI DEPOSITADO R${valor_deposito}")   
+        deposito = services.depositar(cliente_titular, valor_deposito)
+        print(deposito["mensagem"])
 
     elif opcao_menu == "3": #SACAR
         valor_saque = float(input("DIGITE O VALOR PARA SAQUE: "))
-        services.sacar(cliente_titular, valor_saque)
-        print(f"FOI SACADO R${valor_saque}")
+        saque = services.sacar(cliente_titular, valor_saque)
+        print(saque["mensagem"])
 
     elif opcao_menu == "4":#VER EXTRATO
         dados_convertidos = services.converter_dados(cliente_titular)
