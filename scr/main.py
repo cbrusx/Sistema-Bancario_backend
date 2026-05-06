@@ -34,3 +34,10 @@ while True:
         print(f"/n{'-'*15} EXTRATO BANCARIO DE {cliente_titular.titular}{'-'*15}\n")
         extrato_mensagem = services.historico_mensagem(dados_convertidos)
         print(extrato_mensagem)
+    
+    elif opcao_menu == "0": #SAIR
+        print("MUITO OBRIGADO")
+        break
+
+    else: 
+        print("VALOR INVALIDO")
