@@ -76,5 +76,5 @@ def filtro_historico(dados_convertidos, opcao_filtro):
     for formatar in historico_filtrado:
         if "mensagem" in formatar:
             filtro_formatado.append(formatar["mensagem"])
-    return "/n".join(filtro_formatado)
+    return "\n".join(filtro_formatado)
 

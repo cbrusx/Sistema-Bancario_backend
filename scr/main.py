@@ -35,9 +35,31 @@ while True:
         extrato_mensagem = services.historico_mensagem(dados_convertidos)
         print(extrato_mensagem)
     
+    elif opcao_menu == "5": #FILTROS DO HISOTRICO BANCARIO 
+        print("1 -> FILTRAR DEPOSITOS")
+        print("2 -> FILTRAR SAQUE")
+        print("3 -> FILTRAR POR DATA")
+        print("0 -> VOLTAR MENU PRINCIPAL")
+
+        opcao_menu_filtro = int(input("ESCOLHA QUAL FILTRO VOCE DESEJA VER: "))
+        
+        if opcao_menu_filtro == 1: #FILTRO DEPOSITO
+            opcao_filtro = "deposito"
+            filtro_deposito = services.filtro_historico(dados_convertidos, opcao_filtro)
+            
+            if opcao_filtro == 'deposito':
+                    print(f"\n{'LISTA FILTRADA POR DEPOSITOS':-^24}")
+                    print(filtro_deposito)
+
+        elif opcao_menu_filtro == 2:
+            opcao_filtro = "saque"
+            filtro_saque = services.filtro_historico(dados_convertidos, opcao_filtro)
+            
+            print(f"\n{'LISTA FILTRADA POR SAQUES':-^28}")
+            print(filtro_saque)
+
     elif opcao_menu == "0": #SAIR
         print("MUITO OBRIGADO")
         break
-
     else: 
         print("VALOR INVALIDO")
