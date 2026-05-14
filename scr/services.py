@@ -3,11 +3,6 @@ from datetime import datetime
 
 cliente = Cliente
 
-def saldo(cliente):
-    saldo = cliente.saldo
-    return saldo
-
-
 def depositar(cliente, valor_deposito):
     if valor_deposito < 0:
         return {"status":"erro","mensagem":"VALOR INVALIDO"}
