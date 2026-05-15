@@ -3,26 +3,38 @@ from datetime import datetime
 
 cliente = Cliente
 
-def depositar(cliente, valor_deposito):
-    if valor_deposito < 0:
-        return {"status":"erro","mensagem":"VALOR INVALIDO"}
-    data_transacao = datetime.now()
-    data_transacao = data_transacao.strftime("%Y/%m/%d %H:%M:%S")
+# def depositar(cliente, valor_deposito):
+#     if valor_deposito < 0:
+#         return {"status":"erro","mensagem":"VALOR INVALIDO"}
+#     data_transacao = datetime.now()
+#     data_transacao = data_transacao.strftime("%Y/%m/%d %H:%M:%S")
     
-    transacoes = {
-        "tipo":"deposito",
-        "valor":valor_deposito,
-        "data_hora":data_transacao,
-        "mensagem":f"Deposito de R${valor_deposito:.2f} {'-'*20} {data_transacao}"
-    }
-    cliente.historico.append(transacoes)
-    cliente.saldo += valor_deposito
-    return {"status":"erro","mensagem":"DEPOSITO REALIZADO COM SUCESSO"}
+#     transacoes = {
+#         "tipo":"deposito",
+#         "valor":valor_deposito,
+#         "data_hora":data_transacao,
+#         "mensagem":f"Deposito de R${valor_deposito:.2f} {'-'*20} {data_transacao}"
+#     }
+#     cliente.historico.append(transacoes)
+#     cliente.saldo += valor_deposito
+#     return {"status":"erro","mensagem":"DEPOSITO REALIZADO COM SUCESSO"}
+
+def registrar_transacao(cliente, deposito, valor_deposito):
+    if deposito["status"] == "sucesso":
+        data_transacao = datetime.now().strftime("%d/%m/%Y %H:%M:%S")
+    
+        transacoes = {
+            "tipo":"deposito",
+            "valor":valor_deposito,
+            "data_hora":data_transacao,
+            "mensagem":f"Deposito de R${valor_deposito:.2f} {'-'*20} {data_transacao}"
+        }
+        cliente.historico.append(transacoes)
 
 
 def sacar(cliente, valor_saque):
     if valor_saque <= 0:
-        return {"status":"erro","mensagem":"VALOR INVALIDO"}
+        return {"status":"erro","mensagem":"VALOR INVALIDO"}    
     if valor_saque > cliente.saldo:
         return {"status":"erro","mensagem":"VALOR INSUFICIENTE"}    
     

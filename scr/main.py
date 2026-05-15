@@ -21,7 +21,8 @@ while True:
 
     elif opcao_menu == "2": #DEPOSITAR
         valor_deposito = float(input("DIGITE O VALOR PARA DEPOSITO: "))
-        deposito = services.depositar(cliente_titular, valor_deposito)
+        deposito = cliente_titular.depositar(valor_deposito)
+        services.registrar_transacao(cliente_titular, deposito, valor_deposito)
         print(deposito["mensagem"])
 
     elif opcao_menu == "3": #SACAR
