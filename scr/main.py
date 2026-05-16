@@ -14,29 +14,32 @@ while True:
     print("0 -> SAIR")
     
     opcao_menu = input("DIGITE UM NUMERO DO MENU QUE DESEJA VER: ")
+    dados_convertidos = services.converter_dados(cliente_titular)
 
     if opcao_menu == "1": #SALDO
-        saldo = services.saldo(cliente_titular)
+        saldo = cliente_titular.saldo()
         print(saldo)
 
     elif opcao_menu == "2": #DEPOSITAR
         valor_deposito = float(input("DIGITE O VALOR PARA DEPOSITO: "))
         deposito = cliente_titular.depositar(valor_deposito)
-        services.registrar_transacao(cliente_titular, deposito, valor_deposito)
+        tipo = "Deposito"
+        services.registrar_transacao(cliente_titular, tipo, deposito, valor_deposito)
         print(deposito["mensagem"])
 
     elif opcao_menu == "3": #SACAR
         valor_saque = float(input("DIGITE O VALOR PARA SAQUE: "))
-        saque = services.sacar(cliente_titular, valor_saque)
+        saque = cliente_titular.saque(valor_saque)
+        tipo = "Saque"
+        services.registrar_transacao(cliente_titular, tipo, saque, valor_saque)
         print(saque["mensagem"])
 
     elif opcao_menu == "4":#VER EXTRATO
-        dados_convertidos = services.converter_dados(cliente_titular)
         print(f"/n{'-'*15} EXTRATO BANCARIO DE {cliente_titular.titular}{'-'*15}\n")
         extrato_mensagem = services.historico_mensagem(dados_convertidos)
         print(extrato_mensagem)
     
-    elif opcao_menu == "5": #FILTROS DO HISOTRICO BANCARIO 
+    elif opcao_menu == "5": #FILTROS DO HISTORICO BANCARIO 
         print("1 -> FILTRAR DEPOSITOS")
         print("2 -> FILTRAR SAQUE")
         print("3 -> FILTRAR POR DATA")
@@ -45,15 +48,15 @@ while True:
         opcao_menu_filtro = int(input("ESCOLHA QUAL FILTRO VOCE DESEJA VER: "))
         
         if opcao_menu_filtro == 1: #FILTRO DEPOSITO
-            opcao_filtro = "deposito"
+            opcao_filtro = "Deposito"
             filtro_deposito = services.filtro_historico(dados_convertidos, opcao_filtro)
             
-            if opcao_filtro == 'deposito':
+            if opcao_filtro == "Deposito":
                     print(f"\n{'LISTA FILTRADA POR DEPOSITOS':-^24}")
                     print(filtro_deposito)
 
         elif opcao_menu_filtro == 2:
-            opcao_filtro = "saque"
+            opcao_filtro = "Saque"
             filtro_saque = services.filtro_historico(dados_convertidos, opcao_filtro)
             
             print(f"\n{'LISTA FILTRADA POR SAQUES':-^28}")
